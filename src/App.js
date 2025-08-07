@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaFileInvoice } from "react-icons/fa";
-import InvoiceForm from "./components/InvoiceForm";
-import InvoicePreview from "./components/Invoicepreview";
+import InvoiceForm from "./components/Invoicepreview";
+import InvoicePreview from "./components/InvoiceForm";
 
 const App = () => {
   const [invoiceData, setInvoiceData] = useState({
