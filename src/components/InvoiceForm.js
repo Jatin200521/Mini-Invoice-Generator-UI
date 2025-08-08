@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPlus, FaCalculator } from "react-icons/fa";
 import LineItemRow from "./LineItemRow";
+import "../CSS/InvoiceForm.css";
 
 const InvoiceForm = ({
   invoiceData,
@@ -12,60 +13,74 @@ const InvoiceForm = ({
   onValidateForm,
   calculations,
 }) => {
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
+  const formatCurrency = (amount) =>
+    new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
     }).format(amount);
-  };
 
   return (
-    <div>
-      <div>
-        <FaCalculator />
-        <h2>Invoice Details</h2>
+    <div className="invoice-container">
+      <div className="invoice-header">
+        <FaCalculator className="invoice-icon" />
+        <h2 className="invoice-title">Invoice Details</h2>
       </div>
 
-      <div>
-        <div>
-          <h3>Client Information</h3>
+      <div className="section">
+        {/* Client Information */}
+        <div className="space-y-4">
+          <h3 className="section-title">Client Information</h3>
 
           <div>
-            <label>Client Name</label>
+            <label className="label">Client Name *</label>
             <input
               type="text"
               value={invoiceData.clientName}
               onChange={(e) =>
                 onUpdateInvoiceData("clientName", e.target.value)
               }
+              className={`input ${
+                errors.clientName ? "input-error" : "input-normal"
+              }`}
               placeholder="Enter client name"
             />
-            {errors.clientName && <p>{errors.clientName}</p>}
+            {errors.clientName && (
+              <p className="error-text">{errors.clientName}</p>
+            )}
           </div>
 
           <div>
-            <label>Invoice Date:</label>
+            <label className="label">Invoice Date *</label>
             <input
               type="date"
               value={invoiceData.invoiceDate}
               onChange={(e) =>
                 onUpdateInvoiceData("invoiceDate", e.target.value)
               }
+              className={`input ${
+                errors.invoiceDate ? "input-error" : "input-normal"
+              }`}
             />
-            {errors.invoiceDate && <p>{errors.invoiceDate}</p>}
+            {errors.invoiceDate && (
+              <p className="error-text">{errors.invoiceDate}</p>
+            )}
           </div>
         </div>
 
-        <div>
-          <div>
-            <h3>Line Items</h3>
-            <button type="button" onClick={onAddLineItem}>
-              <FaPlus />
-              Add Item
+        {/* Line Items */}
+        <div className="space-y-4">
+          <div className="line-items-header">
+            <h3 className="section-title flex-1">Line Items</h3>
+            <button
+              type="button"
+              onClick={onAddLineItem}
+              className="add-item-btn"
+            >
+              <FaPlus className="add-item-icon" /> Add Item
             </button>
           </div>
 
-          <div>
+          <div className="space-y-4">
             {invoiceData.lineItems.map((item, index) => (
               <LineItemRow
                 key={item.id}
@@ -80,24 +95,31 @@ const InvoiceForm = ({
           </div>
         </div>
 
-        <div>
-          <div>
-            <div>
-              <span>Subtotal:</span>
-              <span>{formatCurrency(calculations.subtotal)}</span>
+        {/* Summary */}
+        <div className="summary">
+          <div className="summary-text">
+            <div className="summary-line">
+              <span className="text-gray-700">Subtotal:</span>
+              <span className="font-medium">
+                {formatCurrency(calculations.subtotal)}
+              </span>
             </div>
-            <div>
-              <span>GST (18%):</span>
-              <span>{formatCurrency(calculations.gst)}</span>
+            <div className="summary-line">
+              <span className="text-gray-700">GST (18%):</span>
+              <span className="font-medium">
+                {formatCurrency(calculations.gst)}
+              </span>
             </div>
-            <div>
-              <span>Total:</span>
-              <span>{formatCurrency(calculations.total)}</span>
+            <div className="summary-total">
+              <span className="font-semibold text-gray-900">Total:</span>
+              <span className="total-text">
+                {formatCurrency(calculations.total)}
+              </span>
             </div>
           </div>
         </div>
 
-        <button type="button" onClick={onValidateForm}>
+        <button type="button" onClick={onValidateForm} className="validate-btn">
           Validate Form
         </button>
       </div>
