@@ -116,7 +116,7 @@ const InvoiceForm = ({
         </div>
 
         <button type="button" onClick={onValidateForm} className="validate-btn">
-          Validate Form
+          Print Invoice
         </button>
       </div>
     </div>

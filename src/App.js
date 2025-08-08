@@ -55,7 +55,6 @@ const App = () => {
 
     const isValid = Object.keys(newErrors).length === 0;
     if (isValid) {
-      alert("Form is valid! Invoice is ready to be processed.");
       window.print();
     }
 
@@ -156,7 +155,7 @@ const App = () => {
             }
             className="px-4 py-2 rounded-lg border shadow-sm bg-white hover:bg-gray-100 transition"
           >
-            {theme === "dark" ? "Dark Mode" : "light Mode"}
+            {theme === "dark" ? "Light Mode" : "Dark Mode"}
           </button>
         </div>
 
