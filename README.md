@@ -38,7 +38,7 @@ src/
    ```bash
    git clone https://github.com/yourusername/mini-invoice-generator.git
    cd mini-invoice-generator
-````
+
 
 2. **Install dependencies**
 
