@@ -27,12 +27,11 @@ const InvoiceForm = ({
       </div>
 
       <div className="section">
-        {/* Client Information */}
         <div className="space-y-4">
           <h3 className="section-title">Client Information</h3>
 
           <div>
-            <label className="label">Client Name *</label>
+            <label className="label">Client Name </label>
             <input
               type="text"
               value={invoiceData.clientName}
@@ -50,7 +49,7 @@ const InvoiceForm = ({
           </div>
 
           <div>
-            <label className="label">Invoice Date *</label>
+            <label className="label">Invoice Date </label>
             <input
               type="date"
               value={invoiceData.invoiceDate}
@@ -67,7 +66,6 @@ const InvoiceForm = ({
           </div>
         </div>
 
-        {/* Line Items */}
         <div className="space-y-4">
           <div className="line-items-header">
             <h3 className="section-title flex-1">Line Items</h3>
@@ -94,8 +92,6 @@ const InvoiceForm = ({
             ))}
           </div>
         </div>
-
-        {/* Summary */}
         <div className="summary">
           <div className="summary-text">
             <div className="summary-line">

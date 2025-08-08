@@ -1,5 +1,6 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
+import "../CSS/LineItem.css";
 
 const LineItemRow = ({
   item,
@@ -13,45 +14,57 @@ const LineItemRow = ({
     onUpdate(item.id, field, value);
   };
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
+  const formatCurrency = (amount) =>
+    new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
     }).format(amount);
-  };
+
+  const hasErrors =
+    errors[`description_${index}`] ||
+    errors[`quantity_${index}`] ||
+    errors[`rate_${index}`];
 
   return (
-    <div>
-      <div>
-        <h4>Item {index + 1}</h4>
+    <div
+      className={`line-item-container ${
+        hasErrors ? "line-item-error" : "line-item-normal"
+      }`}
+    >
+      <div className="line-item-header">
+        <h4 className="line-item-title">Item {index + 1}</h4>
         {canRemove && (
           <button
             type="button"
             onClick={() => onRemove(item.id)}
+            className="remove-btn"
             title="Remove item"
           >
-            <FaTrash />
+            <FaTrash className="remove-icon" />
           </button>
         )}
       </div>
 
-      <div>
+      <div className="fields">
         <div>
-          <label>Description </label>
+          <label className="label">Description</label>
           <input
             type="text"
             value={item.description}
             onChange={(e) => handleInputChange("description", e.target.value)}
+            className={`input ${
+              errors[`description_${index}`] ? "input-error" : "input-normal"
+            }`}
             placeholder="Describe your service or product"
           />
           {errors[`description_${index}`] && (
-            <p>{errors[`description_${index}`]}</p>
+            <p className="error-text">{errors[`description_${index}`]}</p>
           )}
         </div>
 
-        <div>
+        <div className="grid-two">
           <div>
-            <label>Quantity </label>
+            <label className="label">Quantity</label>
             <input
               type="number"
               min="1"
@@ -60,14 +73,17 @@ const LineItemRow = ({
               onChange={(e) =>
                 handleInputChange("quantity", parseInt(e.target.value) || 1)
               }
+              className={`input ${
+                errors[`quantity_${index}`] ? "input-error" : "input-normal"
+              }`}
             />
             {errors[`quantity_${index}`] && (
-              <p>{errors[`quantity_${index}`]}</p>
+              <p className="error-text">{errors[`quantity_${index}`]}</p>
             )}
           </div>
 
           <div>
-            <label>Rate (₹) </label>
+            <label className="label">Rate (₹)</label>
             <input
               type="number"
               min="0"
@@ -76,13 +92,18 @@ const LineItemRow = ({
               onChange={(e) =>
                 handleInputChange("rate", parseFloat(e.target.value) || 0)
               }
+              className={`input ${
+                errors[`rate_${index}`] ? "input-error" : "input-normal"
+              }`}
             />
-            {errors[`rate_${index}`] && <p>{errors[`rate_${index}`]}</p>}
+            {errors[`rate_${index}`] && (
+              <p className="error-text">{errors[`rate_${index}`]}</p>
+            )}
           </div>
         </div>
 
-        <div>
-          <span>
+        <div className="text-right">
+          <span className="amount-text">
             Amount: {formatCurrency((item.quantity || 0) * (item.rate || 0))}
           </span>
         </div>
