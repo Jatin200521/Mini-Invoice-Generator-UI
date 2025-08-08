@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { FaFileInvoice } from "react-icons/fa";
-import InvoicePreview from "./components/Invoicepreview";
+
 import InvoiceForm from "./components/InvoiceForm";
 
 const App = () => {
@@ -11,6 +11,19 @@ const App = () => {
   });
 
   const [errors, setErrors] = useState({});
+
+  const calculations = useMemo(() => {
+    const subtotal = invoiceData.lineItems.reduce((sum, item) => {
+      return (
+        sum + (parseFloat(item.quantity) || 0) * (parseFloat(item.rate) || 0)
+      );
+    }, 0);
+
+    const gst = subtotal * 0.18;
+    const total = subtotal + gst;
+
+    return { subtotal, gst, total };
+  }, [invoiceData.lineItems]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -128,9 +141,8 @@ const App = () => {
             onRemoveLineItem={removeLineItem}
             errors={errors}
             onValidateForm={validateForm}
+            calculations={calculations}
           />
-
-          <InvoicePreview invoiceData={invoiceData} />
         </div>
       </div>
     </div>
