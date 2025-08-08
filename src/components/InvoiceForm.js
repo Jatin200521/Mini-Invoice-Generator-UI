@@ -44,7 +44,7 @@ const InvoiceForm = ({
           </div>
 
           <div>
-            <label>Invoice Date *</label>
+            <label>Invoice Date:</label>
             <input
               type="date"
               value={invoiceData.invoiceDate}

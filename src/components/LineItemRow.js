@@ -37,7 +37,7 @@ const LineItemRow = ({
 
       <div>
         <div>
-          <label>Description *</label>
+          <label>Description </label>
           <input
             type="text"
             value={item.description}
@@ -51,7 +51,7 @@ const LineItemRow = ({
 
         <div>
           <div>
-            <label>Quantity *</label>
+            <label>Quantity </label>
             <input
               type="number"
               min="1"
@@ -67,7 +67,7 @@ const LineItemRow = ({
           </div>
 
           <div>
-            <label>Rate (₹) *</label>
+            <label>Rate (₹) </label>
             <input
               type="number"
               min="0"

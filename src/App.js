@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { FaFileInvoice } from "react-icons/fa";
 import InvoiceForm from "./components/InvoiceForm";
 import InvoicePreview from "./components/Invoicepreview";
+import "./index.css";
 
 const App = () => {
   const [invoiceData, setInvoiceData] = useState({
@@ -122,17 +123,21 @@ const App = () => {
   };
 
   return (
-    <div>
-      <div>
-        <div>
-          <div>
-            <FaFileInvoice />
-            <h1>Invoice Generator</h1>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center mb-4">
+            <FaFileInvoice className="h-8 w-8 text-blue-600 mr-2" />
+            <h1 className="text-3xl font-bold text-gray-900">
+              Invoice Generator
+            </h1>
           </div>
-          <p>Create professional invoices with live preview</p>
+          <p className="text-gray-600">
+            Create professional invoices with live preview
+          </p>
         </div>
 
-        <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <InvoiceForm
             invoiceData={invoiceData}
             onUpdateInvoiceData={updateInvoiceData}
