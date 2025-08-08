@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { FaFileInvoice } from "react-icons/fa";
-
 import InvoiceForm from "./components/InvoiceForm";
+import InvoicePreview from "./components/Invoicepreview";
 
 const App = () => {
   const [invoiceData, setInvoiceData] = useState({
@@ -141,6 +141,11 @@ const App = () => {
             onRemoveLineItem={removeLineItem}
             errors={errors}
             onValidateForm={validateForm}
+            calculations={calculations}
+          />
+
+          <InvoicePreview
+            invoiceData={invoiceData}
             calculations={calculations}
           />
         </div>
