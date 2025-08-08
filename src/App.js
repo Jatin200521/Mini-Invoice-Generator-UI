@@ -132,9 +132,6 @@ const App = () => {
               Invoice Generator
             </h1>
           </div>
-          <p className="text-gray-600">
-            Create professional invoices with live preview
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
