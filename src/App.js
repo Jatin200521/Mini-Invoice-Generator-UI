@@ -5,6 +5,8 @@ import InvoicePreview from "./components/Invoicepreview";
 import "./index.css";
 
 const App = () => {
+  const [theme, setTheme] = useState("dark");
+
   const [invoiceData, setInvoiceData] = useState({
     clientName: "",
     invoiceDate: new Date().toISOString().split("T")[0],
@@ -54,6 +56,7 @@ const App = () => {
     const isValid = Object.keys(newErrors).length === 0;
     if (isValid) {
       alert("Form is valid! Invoice is ready to be processed.");
+      window.print();
     }
 
     return isValid;
@@ -123,15 +126,38 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div
+      className={`min-h-screen py-8 transition-colors duration-500 ${
+        theme === "dark"
+          ? "bg-gradient-to-b from-gray-500 to-black"
+          : "bg-gradient-to-b from-purple-200 via-pink-200 to-white"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <FaFileInvoice className="h-8 w-8 text-blue-600 mr-2" />
-            <h1 className="text-3xl font-bold text-gray-900">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center">
+            <FaFileInvoice
+              className={`h-8 w-8 mr-2 ${
+                theme === "dark" ? "text-blue-400" : "text-blue-600"
+              }`}
+            />
+            <h1
+              className={`text-3xl font-bold ${
+                theme === "dark" ? "text-gray-100" : "text-gray-900"
+              }`}
+            >
               Invoice Generator
             </h1>
           </div>
+
+          <button
+            onClick={() =>
+              setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+            }
+            className="px-4 py-2 rounded-lg border shadow-sm bg-white hover:bg-gray-100 transition"
+          >
+            {theme === "dark" ? "Dark Mode" : "light Mode"}
+          </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
